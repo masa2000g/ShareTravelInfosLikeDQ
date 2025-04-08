@@ -2,15 +2,21 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>アプリ使用ログ</title>
+  <title>行動記録フォーム</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>アプリ使用記録</h2>
-  <p id="status">位置情報取得中...</p>
+  <h2>何してた？</h2>
+  <p id="status">位置情報を取得中...</p>
+
   <form id="appForm">
-    <input type="text" id="sourceTag" readonly>
-    <button type="submit">送信</button>
+    <label for="actionInput">行動内容を入力：</label>
+    <input type="text" id="actionInput" placeholder="例：写真を撮った、休憩した、観光中 など" required>
+    <button type="submit">送信する</button>
   </form>
+
+  <div id="logContainer"></div>
 
   <script src="script.js"></script>
 </body>
