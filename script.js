@@ -1,5 +1,6 @@
 const now = new Date().toISOString();
 
+// 位置情報取得
 navigator.geolocation.getCurrentPosition((pos) => {
   const lat = pos.coords.latitude;
   const lng = pos.coords.longitude;
@@ -9,10 +10,19 @@ navigator.geolocation.getCurrentPosition((pos) => {
   document.getElementById("appForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const action = document.getElementById("actionInput").value;
+    const memo = document.getElementById("actionInput").value;
+    const category = document.getElementById("categorySelect").value;
+    const amount = parseInt(document.getElementById("amountInput").value);
+
+    if (!memo || !category || isNaN(amount)) {
+      alert("すべての項目を正しく入力してください。");
+      return;
+    }
 
     const data = {
-      tag: action,
+      memo: memo,
+      amount_category: category,
+      amount: amount,
       lat: lat,
       lng: lng,
       timestamp: new Date().toISOString()
@@ -31,6 +41,7 @@ navigator.geolocation.getCurrentPosition((pos) => {
   document.getElementById("status").textContent = "位置情報の取得に失敗しました。";
 });
 
+// ログ表示
 fetch("https://sharetravelinfolikedq-default-rtdb.firebaseio.com/logs.json")
   .then(res => res.json())
   .then(data => {
@@ -41,9 +52,11 @@ fetch("https://sharetravelinfolikedq-default-rtdb.firebaseio.com/logs.json")
       div.className = "log-entry";
       div.innerHTML = `
         <strong>${entry.timestamp}</strong><br>
-        ${entry.tag}<br>
-        緯度: ${entry.lat}<br>
-        経度: ${entry.lng}
+        メモ：${entry.memo}<br>
+        カテゴリ：${entry.amount_category || "未設定"}<br>
+        金額：¥${entry.amount || 0}<br>
+        緯度：${entry.lat}<br>
+        経度：${entry.lng}
       `;
       container.appendChild(div);
     }

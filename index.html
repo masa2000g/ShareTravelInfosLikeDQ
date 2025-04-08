@@ -2,17 +2,34 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>行動記録フォーム</title>
+  <title>出費・行動ログ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>何してた？</h2>
-  <p id="status">位置情報を取得中...</p>
+  <h2>行動・出費記録</h2>
+  <p id="status">位置情報取得中...</p>
 
   <form id="appForm">
-    <label for="actionInput">行動内容を入力：</label>
-    <input type="text" id="actionInput" placeholder="例：写真を撮った、休憩した、観光中 など" required>
+    <label for="actionInput">メモ（行動内容など）</label>
+    <input type="text" id="actionInput" placeholder="例：観光、写真撮影、昼食など" required>
+
+    <label for="categorySelect">出費カテゴリ</label>
+    <select id="categorySelect" required>
+      <option value="" disabled selected>カテゴリを選択</option>
+      <option value="食費">食費</option>
+      <option value="交通費">交通費</option>
+      <option value="作業">作業</option>
+      <option value="温泉">温泉</option>
+      <option value="観光費">観光費</option>
+      <option value="買い物">買い物</option>
+      <option value="宿泊費">宿泊費</option>
+      <option value="その他">その他</option>
+    </select>
+
+    <label for="amountInput">金額（円）</label>
+    <input type="number" id="amountInput" placeholder="例：1200" min="0" required>
+
     <button type="submit">送信する</button>
   </form>
 
